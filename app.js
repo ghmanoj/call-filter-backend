@@ -21,12 +21,32 @@ function getRandomDataSet(count) {
 		})
 	}
 
+	let lastIdx = fakeData['spammers'].length
+
+	fakeData['spammers'].push({
+		'id': lastIdx,
+		'number': '937-123-4567',
+		'state': 'Ohio',
+		'type': 0
+	});
+
+	fakeData['spammers'].push({
+		'id': lastIdx+1,
+		'number': '937-123-4567',
+		'state': 'Ohio',
+		'type': 1
+	});
+
 	return fakeData;
 }
 
 
 app.get("/latest_spamdb", async (req, res) => {
-	let data = getRandomDataSet(1000);
+	let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
+	console.log(`Received request from ${ip}`)
+	
+	let data = getRandomDataSet(61280);
+	console.log(data);
 	res.send(data);
 });
 
