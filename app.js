@@ -17,7 +17,8 @@ function getRandomDataSet(count) {
 			'id': i,
 			'number': faker.phone.phoneNumber("!##-!##-####"),
 			'state': faker.address.state(),
-			'type': faker.datatype.number(1)
+			'type': faker.datatype.number(1),
+			'manual': faker.datatype.boolean()
 		})
 	}
 
@@ -27,14 +28,16 @@ function getRandomDataSet(count) {
 		'id': lastIdx,
 		'number': '937-123-4567',
 		'state': 'Ohio',
-		'type': 0
+		'type': 0,
+		'manual': true
 	});
 
 	fakeData['spammers'].push({
 		'id': lastIdx+1,
 		'number': '937-123-4567',
 		'state': 'Ohio',
-		'type': 1
+		'type': 1,
+		'manual': true
 	});
 
 	return fakeData;
