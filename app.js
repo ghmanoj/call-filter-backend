@@ -18,7 +18,7 @@ function getRandomDataSet(count) {
 			'number': faker.phone.phoneNumber("!##-!##-####"),
 			'state': faker.address.state(),
 			'type': faker.datatype.number(1),
-			'manual': faker.datatype.boolean()
+			'manual': false
 		})
 	}
 
@@ -45,11 +45,12 @@ function getRandomDataSet(count) {
 
 
 app.get("/latest_spamdb", async (req, res) => {
+	let size = req.query['size'] || 6120
+	console.log(`Sending ${size} data sets`)
 	let ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress 
 	console.log(`Received request from ${ip}`)
 	
-	let data = getRandomDataSet(61280);
-	console.log(data);
+	let data = getRandomDataSet(size);
 	res.send(data);
 });
 
